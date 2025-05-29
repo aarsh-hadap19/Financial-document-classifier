@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
                 const SizedBox(height: 32),
                 const Text(
-                  'FinDoc Classifier',
+                  'Fi-Classify',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
