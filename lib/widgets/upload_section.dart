@@ -28,6 +28,7 @@ class UploadSection extends StatelessWidget {
             SnackBar(
               content: Text('${result.files.length} file(s) uploaded successfully!'),
               backgroundColor: Colors.green,
+              duration: const Duration(seconds: 2),
             ),
           );
         }
@@ -38,6 +39,7 @@ class UploadSection extends StatelessWidget {
           SnackBar(
             content: Text('Error picking files: $e'),
             backgroundColor: Theme.of(context).colorScheme.error,
+            duration: const Duration(seconds: 3),
           ),
         );
       }
@@ -50,12 +52,13 @@ class UploadSection extends StatelessWidget {
       builder: (context, documentProvider, child) {
         return Card(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(16), // Reduced padding
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(32),
+                  padding: const EdgeInsets.all(20), // Reduced padding
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Theme.of(context).colorScheme.outline.withOpacity(0.5),
@@ -66,28 +69,29 @@ class UploadSection extends StatelessWidget {
                     color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                   ),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.cloud_upload_outlined,
-                        size: 48,
+                        size: 40, // Reduced size
                         color: Theme.of(context).colorScheme.primary,
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
                       Text(
                         'Upload Financial Documents',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 6),
                       Text(
                         'Support for PDF, Images, and Word documents',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
                       ElevatedButton.icon(
                         onPressed: documentProvider.isUploading
                             ? null
@@ -104,8 +108,8 @@ class UploadSection extends StatelessWidget {
                             : 'Choose Files'),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 12,
+                            horizontal: 20,
+                            vertical: 10,
                           ),
                         ),
                       ),
@@ -113,10 +117,10 @@ class UploadSection extends StatelessWidget {
                   ),
                 ),
                 if (documentProvider.error != null) ...[
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.errorContainer,
                       borderRadius: BorderRadius.circular(8),
@@ -126,7 +130,7 @@ class UploadSection extends StatelessWidget {
                         Icon(
                           Icons.error_outline,
                           color: Theme.of(context).colorScheme.onErrorContainer,
-                          size: 20,
+                          size: 18,
                         ),
                         const SizedBox(width: 8),
                         Expanded(
@@ -134,6 +138,7 @@ class UploadSection extends StatelessWidget {
                             documentProvider.error!,
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.onErrorContainer,
+                              fontSize: 12,
                             ),
                           ),
                         ),
@@ -142,8 +147,13 @@ class UploadSection extends StatelessWidget {
                           icon: Icon(
                             Icons.close,
                             color: Theme.of(context).colorScheme.onErrorContainer,
-                            size: 20,
+                            size: 18,
                           ),
+                          constraints: const BoxConstraints(
+                            minWidth: 32,
+                            minHeight: 32,
+                          ),
+                          padding: EdgeInsets.zero,
                         ),
                       ],
                     ),
